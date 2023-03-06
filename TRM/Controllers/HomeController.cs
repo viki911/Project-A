@@ -4,13 +4,19 @@ using TRM.Models;
 
 namespace TRM.Controllers
 {
+    
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+        public IActionResult HomeView()
+        {
+            return View();
         }
 
         public IActionResult Index()

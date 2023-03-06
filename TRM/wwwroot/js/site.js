@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿$(".availseats").each(function () {
+        var a = $(this).text();
+    var b = parseInt(a);
+    if (b == 0)
+    {
+        $(this).css("background-color", "red");
+        $(this).html("Seats filled");
+    }
+});

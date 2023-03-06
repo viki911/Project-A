@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "V Services";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<body>
+ 
+    <div class="row menu">
+        <div class="col-md-6 first justify-content-around" >
+
+            <a style="cursor:pointer;color:whitesmoke;font-size:2rem;margin-top:50px" asp-controller="Employee" asp-action="Index">
+                <b>Add Employee</b><br />
+                <img class="navs" src="~/images/employee.png" />
+            </a>
+            <a style="cursor:pointer;color:whitesmoke;font-size:2rem;margin-top:50px" asp-controller="Vehicle" asp-action="Index">
+                <b>Add Vehicle</b><br />
+                <img class="navs" src="~/images/vehicle.png" />
+            </a>
+
+        </div>
+        <div class="col-md-6 second justify-content-around">
+
+            <a style="cursor:pointer;color:whitesmoke;font-size:2rem;margin-top:50px" asp-controller="RouteStop" asp-action="Index">
+                <b>Add Route</b><br />
+                <img class="navs2" src="~/images/route.jpg" />
+            </a>
+
+            <a style="cursor:pointer;color:whitesmoke;font-size:2rem;margin-top:50px" asp-controller="Allocate" asp-action="Index">
+                <b>Allocate</b><br />
+                <img class="navs2" src="~/images/Allocate.jpg" />
+            </a>
+
+        </div>
+    </div>
+    
+</body>

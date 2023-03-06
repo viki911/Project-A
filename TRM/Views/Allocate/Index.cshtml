@@ -1,0 +1,71 @@
+﻿@model IEnumerable<TRM.Models.Allocate>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="filler"></div>
+
+<a asp-action="Create" class="form-top-nav">Allocate</a>
+
+<table class="table table-form">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AllocateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RouteStop)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Vehicle.Capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle.AvailSeats)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllocateId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.VehicleId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmpId)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.EmpName)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RouteStop.RouteStopId)
+            </td>
+                <td class="capacity">
+                    @Html.DisplayFor(modelItem => item.Vehicle.Capacity)
+                </td>
+                <td class="availseats">
+                    @Html.DisplayFor(modelItem => item.Vehicle.AvailSeats)
+                </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.AllocateId" class="action-nav">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.AllocateId" class="action-nav">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.AllocateId" class="action-nav">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

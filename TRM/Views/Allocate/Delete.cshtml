@@ -1,39 +1,41 @@
-﻿@model TRM.Models.RouteStop
+﻿@model TRM.Models.Allocate
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="form-bg">
     <h1>Delete</h1>
     <h3>Are you sure you want to delete this?</h3>
     <hr />
     <div class="del">
-        <h4>Route</h4>
+        <h4>Allocate</h4>
         <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RouteStopName1)
+            @Html.DisplayNameFor(model => model.Vehicle)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RouteStopName1)
+            @Html.DisplayFor(model => model.Vehicle.VehicleId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RouteStopName2)
+            @Html.DisplayNameFor(model => model.Employee)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RouteStopName2)
+            @Html.DisplayFor(model => model.Employee.EmpId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RouteStopName3)
+            @Html.DisplayNameFor(model => model.RouteStop)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RouteStopName3)
+            @Html.DisplayFor(model => model.RouteStop.RouteStopId)
         </dd>
     </dl>
+    
     <form asp-action="Delete">
-        <input type="hidden" asp-for="RouteStopId" />
-            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Route is deleted')"  />
+        <input type="hidden" asp-for="AllocateId" />
+            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Allocation is deleted')" />
             <a asp-action="Index" class="form-nav">List</a>
     </form>
 </div>

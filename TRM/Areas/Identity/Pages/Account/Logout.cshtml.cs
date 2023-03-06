@@ -15,10 +15,10 @@ namespace TRM.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<TRMUser> _signInManager;
+        private readonly SignInManager<TRMAdmin> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<TRMUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<TRMAdmin> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

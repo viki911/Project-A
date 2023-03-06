@@ -1,14 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using TRM.Data;
 using TRM.Areas.Identity.Data;
+//using TRM.Areas.Identity.Data;
+////using TRM.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TRMContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TRMContext") ?? throw new InvalidOperationException("Connection string 'TRMContext' not found.")));
 
-builder.Services.AddDefaultIdentity<TRMUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<TRMContext>();
+builder.Services.AddDefaultIdentity<TRMAdmin>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DataTRMContext>();
+builder.Services.AddDbContext<DataTRMContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataTRMContextConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -27,12 +29,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=HomeView}/{id?}");
 app.MapRazorPages();
 
 app.Run();
+

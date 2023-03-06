@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using TRM.Areas.Identity.Data
 
-@inject SignInManager<TRMUser> SignInManager
-@inject UserManager<TRMUser> UserManager
+@inject SignInManager<TRMAdmin> SignInManager
+@inject UserManager<TRMAdmin> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

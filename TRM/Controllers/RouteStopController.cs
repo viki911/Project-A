@@ -21,8 +21,9 @@ namespace TRM.Controllers
         // GET: RouteStop
         public async Task<IActionResult> Index()
         {
-            var tRMContext = _context.RouteStop.Include(r => r.Vehicle);
-            return View(await tRMContext.ToListAsync());
+              return _context.RouteStop != null ? 
+                          View(await _context.RouteStop.ToListAsync()) :
+                          Problem("Entity set 'TRMContext.RouteStop'  is null.");
         }
 
         // GET: RouteStop/Details/5
@@ -34,7 +35,6 @@ namespace TRM.Controllers
             }
 
             var routeStop = await _context.RouteStop
-                .Include(r => r.Vehicle)
                 .FirstOrDefaultAsync(m => m.RouteStopId == id);
             if (routeStop == null)
             {
@@ -47,7 +47,6 @@ namespace TRM.Controllers
         // GET: RouteStop/Create
         public IActionResult Create()
         {
-            ViewData["VehicleId"] = new SelectList(_context.Set<Vehicle>(), "VehicleId", "VehicleId");
             return View();
         }
 
@@ -56,7 +55,7 @@ namespace TRM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RouteStopId,RouteStopName1,RouteStopName2,RouteStopName3,VehicleId")] RouteStop routeStop)
+        public async Task<IActionResult> Create([Bind("RouteStopId,RouteStopName1,RouteStopName2,RouteStopName3")] RouteStop routeStop)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +63,6 @@ namespace TRM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehicleId"] = new SelectList(_context.Set<Vehicle>(), "VehicleId", "VehicleId", routeStop.VehicleId);
             return View(routeStop);
         }
 
@@ -81,7 +79,6 @@ namespace TRM.Controllers
             {
                 return NotFound();
             }
-            ViewData["VehicleId"] = new SelectList(_context.Set<Vehicle>(), "VehicleId", "VehicleId", routeStop.VehicleId);
             return View(routeStop);
         }
 
@@ -90,7 +87,7 @@ namespace TRM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RouteStopId,RouteStopName1,RouteStopName2,RouteStopName3,VehicleId")] RouteStop routeStop)
+        public async Task<IActionResult> Edit(int id, [Bind("RouteStopId,RouteStopName1,RouteStopName2,RouteStopName3")] RouteStop routeStop)
         {
             if (id != routeStop.RouteStopId)
             {
@@ -117,7 +114,6 @@ namespace TRM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VehicleId"] = new SelectList(_context.Set<Vehicle>(), "VehicleId", "VehicleId", routeStop.VehicleId);
             return View(routeStop);
         }
 
@@ -130,7 +126,6 @@ namespace TRM.Controllers
             }
 
             var routeStop = await _context.RouteStop
-                .Include(r => r.Vehicle)
                 .FirstOrDefaultAsync(m => m.RouteStopId == id);
             if (routeStop == null)
             {

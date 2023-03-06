@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TRM.Areas.Identity.Data;
 
-namespace TRM.Data;
+namespace TRM.Areas.Identity.Data;
 
-public class TRMContext : IdentityDbContext<TRMUser>
+public class DataTRMContext : IdentityDbContext<TRMAdmin>
 {
-    public TRMContext(DbContextOptions<TRMContext> options)
+    public DataTRMContext(DbContextOptions<DataTRMContext> options)
         : base(options)
     {
     }

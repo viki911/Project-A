@@ -24,17 +24,17 @@ namespace TRM.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<TRMUser> _signInManager;
-        private readonly UserManager<TRMUser> _userManager;
-        private readonly IUserStore<TRMUser> _userStore;
-        private readonly IUserEmailStore<TRMUser> _emailStore;
+        private readonly SignInManager<TRMAdmin> _signInManager;
+        private readonly UserManager<TRMAdmin> _userManager;
+        private readonly IUserStore<TRMAdmin> _userStore;
+        private readonly IUserEmailStore<TRMAdmin> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<TRMUser> userManager,
-            IUserStore<TRMUser> userStore,
-            SignInManager<TRMUser> signInManager,
+            UserManager<TRMAdmin> userManager,
+            IUserStore<TRMAdmin> userStore,
+            SignInManager<TRMAdmin> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -155,27 +155,27 @@ namespace TRM.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private TRMUser CreateUser()
+        private TRMAdmin CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<TRMUser>();
+                return Activator.CreateInstance<TRMAdmin>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(TRMUser)}'. " +
-                    $"Ensure that '{nameof(TRMUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(TRMAdmin)}'. " +
+                    $"Ensure that '{nameof(TRMAdmin)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<TRMUser> GetEmailStore()
+        private IUserEmailStore<TRMAdmin> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<TRMUser>)_userStore;
+            return (IUserEmailStore<TRMAdmin>)_userStore;
         }
     }
 }

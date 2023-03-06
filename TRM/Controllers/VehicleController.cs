@@ -12,7 +12,7 @@ namespace TRM.Controllers
     public class VehicleController : Controller
     {
         private readonly TRMContext _context;
-
+       
         public VehicleController(TRMContext context)
         {
             _context = context;
@@ -21,13 +21,12 @@ namespace TRM.Controllers
         // GET: Vehicle
         public async Task<IActionResult> Index()
         {
-              return _context.Vehicle != null ? 
-                          View(await _context.Vehicle.ToListAsync()) :
-                          Problem("Entity set 'TRMContext.Vehicle'  is null.");
+            var tRMContext = _context.Vehicle.Include(v => v.RouteStop);
+            return View(await tRMContext.ToListAsync());
         }
 
         // GET: Vehicle/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Vehicle == null)
             {
@@ -35,6 +34,7 @@ namespace TRM.Controllers
             }
 
             var vehicle = await _context.Vehicle
+                .Include(v => v.RouteStop)
                 .FirstOrDefaultAsync(m => m.VehicleId == id);
             if (vehicle == null)
             {
@@ -43,10 +43,12 @@ namespace TRM.Controllers
 
             return View(vehicle);
         }
+      
 
         // GET: Vehicle/Create
         public IActionResult Create()
         {
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId");
             return View();
         }
 
@@ -55,19 +57,21 @@ namespace TRM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VehicleId,Capacity,AvailSeats,Isoperable")] Vehicle vehicle)
+        public async Task<IActionResult> Create([Bind("VehicleId,Capacity,AvailSeats,Isoperable,RouteStopId")] Vehicle vehicle)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", vehicle.RouteStopId);
             return View(vehicle);
         }
 
         // GET: Vehicle/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Vehicle == null)
             {
@@ -79,6 +83,7 @@ namespace TRM.Controllers
             {
                 return NotFound();
             }
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", vehicle.RouteStopId);
             return View(vehicle);
         }
 
@@ -87,7 +92,7 @@ namespace TRM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VehicleId,Capacity,AvailSeats,Isoperable")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(string id, [Bind("VehicleId,Capacity,AvailSeats,Isoperable,RouteStopId")] Vehicle vehicle)
         {
             if (id != vehicle.VehicleId)
             {
@@ -114,11 +119,12 @@ namespace TRM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", vehicle.RouteStopId);
             return View(vehicle);
         }
 
         // GET: Vehicle/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Vehicle == null)
             {
@@ -126,6 +132,7 @@ namespace TRM.Controllers
             }
 
             var vehicle = await _context.Vehicle
+                .Include(v => v.RouteStop)
                 .FirstOrDefaultAsync(m => m.VehicleId == id);
             if (vehicle == null)
             {
@@ -138,7 +145,7 @@ namespace TRM.Controllers
         // POST: Vehicle/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Vehicle == null)
             {
@@ -154,7 +161,7 @@ namespace TRM.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VehicleExists(int id)
+        private bool VehicleExists(string id)
         {
           return (_context.Vehicle?.Any(e => e.VehicleId == id)).GetValueOrDefault();
         }

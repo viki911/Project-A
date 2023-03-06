@@ -2,16 +2,18 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="filler"></div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<a asp-action="Create" class="form-top-nav">Add Employee</a>
+<table class="table table-form">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.EmpName)
             </th>
@@ -25,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle)
+                @Html.DisplayNameFor(model => model.RouteStop)
             </th>
             <th></th>
         </tr>
@@ -33,6 +35,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+               <td>
+                    @Html.DisplayFor(modelItem => item.EmpId)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EmpName)
             </td>
@@ -46,12 +51,12 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vehicle.VehicleId)
+                @Html.DisplayFor(modelItem => item.RouteStop.RouteStopId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.EmpId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmpId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmpId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.EmpId" class="action-nav">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.EmpId" class="action-nav">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.EmpId" class="action-nav">Delete</a>
             </td>
         </tr>
 }

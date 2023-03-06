@@ -1,8 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+    
+<body>
+<div class="row menu">
+    <div class="col-md-6 first">
+       
+                    <a  style="cursor:pointer;color:whitesmoke" asp-controller="Employee" asp-action="Index">
+                    <b><p style="font-size:3rem">Add Employee</p></b><br />
+                    <img class="navs" src="~/images/employee.png" />
+                </a>
+                    <a style="cursor:pointer;color:whitesmoke" asp-controller="Vehicle" asp-action="Index">
+                    <b><p style="font-size:3rem">Add Vehicle</p></b><br />
+                    <img class="navs"  src="~/images/vehicle.png" />
+                </a>
+           
+	</div>
+    <div class="col-md-6 second justify-content-around">
+       
+                    <a  style="cursor:pointer;color:whitesmoke" asp-controller="RouteStop" asp-action="Index">
+                        <b><p style="font-size:3rem">Add Route</p></b><br />
+                        <img class="navs2" src="~/images/route.jpg" />
+                </a>
+	
+                    <a  style="cursor:pointer;color:whitesmoke" asp-controller="Allocate" asp-action="Index">
+                    <b><p style="font-size:3rem">Allocate</p></b><br />
+                    <img class="navs2"  src="~/images/Allocate.jpg" />
+                </a>
+           
+		</div>
+  </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</body>

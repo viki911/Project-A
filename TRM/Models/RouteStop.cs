@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing.Printing;
 
 namespace TRM.Models
 {
@@ -11,9 +12,8 @@ namespace TRM.Models
         public string? RouteStopName2 { get; set; }
         public string? RouteStopName3 { get; set; }
 
-        [ForeignKey("Vehicle")]
-        public int VehicleId { get; set; }
-        public Vehicle? Vehicle { get; set; }
+      
 
     }
+
 }

@@ -9,87 +9,90 @@ using TRM.Models;
 
 namespace TRM.Controllers
 {
-    public class AdminController : Controller
+    public class EmployeeController : Controller
     {
         private readonly TRMContext _context;
 
-        public AdminController(TRMContext context)
+        public EmployeeController(TRMContext context)
         {
             _context = context;
         }
 
-        // GET: Admin
+        // GET: Employee
         public async Task<IActionResult> Index()
         {
-              return _context.Admin != null ? 
-                          View(await _context.Admin.ToListAsync()) :
-                          Problem("Entity set 'TRMContext.Admin'  is null.");
+            var tRMContext = _context.Employee.Include(e => e.RouteStop);
+            return View(await tRMContext.ToListAsync());
         }
 
-        // GET: Admin/Details/5
+        // GET: Employee/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Admin == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var employee = await _context.Employee
+                .Include(e => e.RouteStop)
+                .FirstOrDefaultAsync(m => m.EmpId == id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(employee);
         }
 
-        // GET: Admin/Create
+        // GET: Employee/Create
         public IActionResult Create()
         {
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId");
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Employee/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdminId,UserName,Password")] Admin admin)
+        public async Task<IActionResult> Create([Bind("EmpId,EmpName,Age,Location,Phone,RouteStopId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(admin);
+                _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", employee.RouteStopId);
+            return View(employee);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Employee/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Admin == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
-            return View(admin);
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", employee.RouteStopId);
+            return View(employee);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Employee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdminId,UserName,Password")] Admin admin)
+        public async Task<IActionResult> Edit(int id, [Bind("EmpId,EmpName,Age,Location,Phone,RouteStopId")] Employee employee)
         {
-            if (id != admin.AdminId)
+            if (id != employee.EmpId)
             {
                 return NotFound();
             }
@@ -98,12 +101,12 @@ namespace TRM.Controllers
             {
                 try
                 {
-                    _context.Update(admin);
+                    _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.AdminId))
+                    if (!EmployeeExists(employee.EmpId))
                     {
                         return NotFound();
                     }
@@ -114,49 +117,51 @@ namespace TRM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            ViewData["RouteStopId"] = new SelectList(_context.RouteStop, "RouteStopId", "RouteStopId", employee.RouteStopId);
+            return View(employee);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Employee/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Admin == null)
+            if (id == null || _context.Employee == null)
             {
                 return NotFound();
             }
 
-            var admin = await _context.Admin
-                .FirstOrDefaultAsync(m => m.AdminId == id);
-            if (admin == null)
+            var employee = await _context.Employee
+                .Include(e => e.RouteStop)
+                .FirstOrDefaultAsync(m => m.EmpId == id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(employee);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Employee/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Admin == null)
+            if (_context.Employee == null)
             {
-                return Problem("Entity set 'TRMContext.Admin'  is null.");
+                return Problem("Entity set 'TRMContext.Employee'  is null.");
             }
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin != null)
+            var employee = await _context.Employee.FindAsync(id);
+            if (employee != null)
             {
-                _context.Admin.Remove(admin);
+                _context.Employee.Remove(employee);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(int id)
+        private bool EmployeeExists(int id)
         {
-          return (_context.Admin?.Any(e => e.AdminId == id)).GetValueOrDefault();
+          return (_context.Employee?.Any(e => e.EmpId == id)).GetValueOrDefault();
         }
     }
 }

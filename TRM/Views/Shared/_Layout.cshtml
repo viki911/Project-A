@@ -7,27 +7,68 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TRM.styles.css" asp-append-version="true" />
+
 </head>
-<body>
+<body class="layout">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+    
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TRM</a>
+                
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="HomeView"><img class="icon" src="~/images/V-Icon.png" /><h1 class="icon-title">Services</h1></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+       
             </div>
+            <div class="dropdown" id="dp1">
+                <button type="button" class="btn nav-btn dropdown-toggle" style="color:white;font-weight:bold;" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" data-bs-toggle="dropdown">
+                    Employee
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Employee" asp-action="Create">Add Employee</a></li>
+                    <li><a class="dropdown-item" asp-controller="Employee" asp-action="Index">Details</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn nav-btn dropdown-toggle" style="color:white;font-weight:bold;" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" data-bs-toggle="dropdown">
+                    Route
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="RouteStop" asp-action="Create">Add Route</a></li>
+                    <li><a class="dropdown-item" asp-controller="RouteStop" asp-action="Index">Details</a></li>
+                </ul>
+            </div>
+            <div class="dropdown" id="dp1">
+                <button type="button" class="btn nav-btn  dropdown-toggle" style="color:white;font-weight:bold;" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" data-bs-toggle="dropdown">
+                    Vehicle
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Vehicle" asp-action="Create">Add Vehicle</a></li>
+                    <li><a class="dropdown-item" asp-controller="Vehicle" asp-action="Index">Details</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button type="button" class="btn nav-btn  dropdown-toggle" style="color:white;font-weight:bold;" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" data-bs-toggle="dropdown">
+                    Allocate
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-controller="Allocate" asp-action="Create">Add Allocation</a></li>
+                    <li><a class="dropdown-item" asp-controller="Allocate" asp-action="Index">Details</a></li>
+                </ul>
+            </div>
+            <div class="navbar-collapse collapse" id="items">
+                <ul class="navbar-nav flex-grow-1 ">
+                    <li class="nav-item ">
+                        <button class="nav-btn"><a class="nav-link navigation" style="color:white;font-weight:bold;" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" asp-area="" asp-controller="Home" asp-action="HomeView">Home</a></button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-btn"><a class="nav-link navigation" style="color:white;font-weight:bold" onMouseOver="this.style.color='#000000'" onmouseout="this.style.color='#FFFFFF'" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a></button>
+                    </li>
+                </ul>
+@*             <partial name="_LoginPartial" />
+*@            </div>
         </nav>
     </header>
     <div class="container">
@@ -35,12 +76,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - TRM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

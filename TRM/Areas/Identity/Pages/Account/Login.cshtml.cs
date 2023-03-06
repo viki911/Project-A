@@ -20,10 +20,10 @@ namespace TRM.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<TRMUser> _signInManager;
+        private readonly SignInManager<TRMAdmin> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<TRMUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<TRMAdmin> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

@@ -1,7 +1,10 @@
 html {
   font-size: 14px;
 }
-
+a{
+    text-decoration:none;
+    color:black;
+}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -17,6 +20,150 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+
+/*index*/
+.layout {
+    background-size: cover;
+    background-position-x: center;
+    background-repeat: space;
+    display: block;/*
+    background-image: url('../images/deva-darshan-jt9syhehrpe-unsplash.jpg');*/
+    background-image: url('../images/cris-ovalle-ytk8to3pgda-unsplash.jpg');
+/**//*    background-image: url('../images/marc-olivier-jodoin-nqoinj-ttqm-unsplash.jpg');
+*/}
+.icon{
+    height:90px;
+    width:70px;
+    border-radius:50%;
 }
+.icon-title {
+    margin-top: 30px;
+    font-family: fantasy;
+    text-shadow: -2px 4px 0 rgba(0,0,0,0.3);
+} 
+.navbar-brand{display:inline-flex;}
+.navbar{opacity:80%;}
+.nav-btn a{
+    background-color: black;
+}
+.nav-btn:hover{
+    background-color: white;
+}
+.nav-btn a:hover {
+    background-color: white;
+}
+.nav-btn {    
+    margin: 10px;
+    width: 120px;
+    background-color:black;
+}
+
+.menu {
+    margin-top: 170px;
+    margin-left: 230px;
+    height:400px;
+    width: 1100px;
+    background: rgba( 9, 4, 4, 0.45 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.navs{
+    height:180px;
+    width:180px;
+}
+.navs2{
+    height:170px;
+    width:170px;
+    border-radius:50%;
+}
+.first{display:flex;}
+.second{display:flex;}
+.form-bg {
+    margin-top: 160px;
+    background: rgba( 255, 255, 255, 0.75 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 800px;
+    height: 500px;
+    margin-left: 200px;
+}
+.form{
+    margin-left:100px;
+    width:600px;
+}
+.form-title{
+    margin-left:300px;
+    padding:15px;
+}
+.form-nav {
+    margin-left: 350px;
+    text-decoration: none;
+    background-color: black;
+    color: whitesmoke;
+    padding: 10px;
+}
+.form-nav:hover{background-color:whitesmoke;color:black;}
+.form-top-nav {
+    margin-left:30px;
+    text-decoration: none;
+    background-color: whitesmoke;
+    color: black;
+    padding: 10px;
+}
+.form-top-nav:hover {
+    background-color:black;
+    color: whitesmoke;
+}
+.table-form {
+    margin:20px;
+    background: rgba( 255, 255, 255, 0.75 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.content{
+    margin-top:70px;
+}
+
+.action-nav{
+    background-color:whitesmoke;
+    color:red;
+    padding:5px;
+    border-radius:5px;
+}
+.action-nav:hover {
+        background-color:black;
+        color:whitesmoke;
+    }
+
+.filler{
+    height:130px;
+}
+
+.form-nav-det {
+    margin-left:25px;
+    text-decoration: none;
+    background-color: black;
+    color: whitesmoke;
+    padding: 10px;
+    margin-top:10px;
+}
+
+    .form-nav-det:hover {
+        background-color: whitesmoke;
+        color: black;
+    }
+.del{
+    text-align:center;
+}
+
+/*Notifiction*/
