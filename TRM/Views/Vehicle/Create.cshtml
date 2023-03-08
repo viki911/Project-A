@@ -46,12 +46,18 @@
 </div>
 @section scripts{
     <script>
-        $(document).ready(function () { validate(); });
-        function validate(){
-            if ($('.ip-capacity').val() < $('.ip-availseats').val()) 
+             function validate()
+        { 
+            while($('.ip-availseats').val()< 1)
             {
-                alert("AvailSeats must be less than or equal to capacity");
+                alert('Availseats cannot be less than 1');
+                break;
             }
+            while($('.ip-capacity').val() < $('.ip-availseats').val()) 
+            {
+                alert('Availseats cannot be greater than capacity');
+                break;
+            }  
         }
     </script>
 }
